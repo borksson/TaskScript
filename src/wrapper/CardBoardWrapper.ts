@@ -1,4 +1,4 @@
-import { SchoolTask } from "../school/SchoolTask";
+import { SchoolTask } from "../model/school/SchoolTask";
 
 export class CardBoardWrapper extends SchoolTask {
     schoolTask: SchoolTask;

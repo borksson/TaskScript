@@ -17,6 +17,9 @@
 # Environment variables
 .env
 
+# App Data
+/data
+
 # Other
 *.bak
 *.tmp

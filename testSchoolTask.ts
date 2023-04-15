@@ -1,5 +1,5 @@
-import { Assignment } from "./task/school/Assignment";
-import { CardBoardWrapper } from "./task/wrapper/CardBoardWrapper";
+import { Assignment } from "./src/model/school/Assignment";
+import { CardBoardWrapper } from "./src/wrapper/CardBoardWrapper";
 
 const main = async () => {
     const schoolTask = new Assignment("Test", "Test", "submitted", new Date(), new Date(), new Date(), "Test", 100);
