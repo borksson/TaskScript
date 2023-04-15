@@ -1,23 +1,29 @@
 import { Task } from "../../model/Task";
+import { AuthenticatedWebsiteScraper } from "./AuthenticatedWebsiteScraper";
 import { LoadTasks } from "./LoadTasks";
 
-export abstract class WebScrapperLoadTasks<T extends Task> extends LoadTasks<T> {
-    websiteUrl: string;
+export abstract class WebScrapperLoadTasks<T extends Task, W extends AuthenticatedWebsiteScraper<T>> extends LoadTasks<T> {
+    websites: W[];
+    authDriver: any;
 
-    constructor(websiteUrl: string) {
+    constructor(websites: W[], authDriver: any) {
         super();
-        this.websiteUrl = websiteUrl;
+        this.websites = websites;
+        this.authDriver = authDriver;
     }
 
-    loadFileTasks = (): any[] => {
-        const htmlString = this.loadWebsite();
-        const htmlTasks = this.parseHtml(htmlString);
-        return htmlTasks;
+    loadFileTasks = async () => {
+        this.authDriver = await this.authenticate();
+        let webTasks = [];
+        // Load tasks from each website
+        for (const website of this.websites) {
+            // Load tasks
+            const tasks = await website.getTasks(this.authDriver);
+            // Add tasks to webTasks
+            webTasks.push(...tasks);
+        }
+        return webTasks;
     }
 
-    protected abstract createTask(jsonTask: any): T;
-
-    protected abstract loadWebsite(): string;
-
-    protected abstract parseHtml(htmlString: string): any[];
+    protected abstract authenticate(): Promise<any>;
 }

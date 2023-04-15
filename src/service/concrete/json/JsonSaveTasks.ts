@@ -1,5 +1,5 @@
-import { Task } from "../../model/Task";
-import { ISaveTasks } from "../interfaces/ISaveTasks";
+import { Task } from "../../../model/Task";
+import { ISaveTasks } from "../../interfaces/ISaveTasks";
 
 import * as fs from 'fs';
 
