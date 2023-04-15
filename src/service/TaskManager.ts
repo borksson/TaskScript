@@ -4,7 +4,7 @@ import { IUpdateTasks } from './interfaces/IUpdateTasks';
 import { ISaveTasks } from './interfaces/ISaveTasks';
 import { Task } from '../model/Task';
 
-class TaskManager<T extends Task> {
+export class TaskManager<T extends Task> {
     loadSavedTasksModule: ILoadTasks<T>;
     loadNewTasksModule: ILoadTasks<T>;
     loadViewTasksModule: ILoadTasks<T>;

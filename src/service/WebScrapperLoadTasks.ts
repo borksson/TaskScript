@@ -1,4 +1,4 @@
-import { Task } from "../../model/Task";
+import { Task } from "../model/Task";
 import { AuthenticatedWebsiteScraper } from "./AuthenticatedWebsiteScraper";
 import { LoadTasks } from "./LoadTasks";
 
@@ -6,10 +6,9 @@ export abstract class WebScrapperLoadTasks<T extends Task, W extends Authenticat
     websites: W[];
     authDriver: any;
 
-    constructor(websites: W[], authDriver: any) {
+    constructor(websites: W[]) {
         super();
         this.websites = websites;
-        this.authDriver = authDriver;
     }
 
     loadFileTasks = async () => {

@@ -1,9 +1,9 @@
-import { Task } from "../../../model/Task";
-import { ISaveTasks } from "../../interfaces/ISaveTasks";
+import { Task } from "../../model/Task";
+import { ISaveTasks } from "../interfaces/ISaveTasks";
 
 import * as fs from 'fs';
 
-export abstract class JsonSaveTasks<T extends Task> implements ISaveTasks<T> {
+export class JsonSaveTasks<T extends Task> implements ISaveTasks<T> {
     private fileName: string;
 
     constructor(fileName: string) { 

@@ -1,4 +1,4 @@
-import { SchoolTask } from "../../../model/school/SchoolTask";
+import { SchoolTask } from "../../model/school/SchoolTask";
 import { AuthenticatedWebsiteScraper } from "../AuthenticatedWebsiteScraper";
 
 export class CanvasAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask> {

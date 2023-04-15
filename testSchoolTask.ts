@@ -1,12 +1,24 @@
+import { TaskManager } from "./src/service/TaskManager";
+import { CompareSchoolTasks } from "./src/service/CompareSchoolTasks";
+import { ByuWebScrapperLoadTasks } from "./src/service/byu/ByuWebScrapperLoadTasks";
+import { SchoolJsonLoadTasks } from "./src/service/school/SchoolJsonLoadTasks";
+import { SchoolMarkdownLoadTasks } from "./src/service/school/SchoolMarkdownLoadTasks";
+import { SchoolMarkdownUpdateTasks } from "./src/service/school/SchoolMarkdownUpdateTasks";
+import { JsonSaveTasks } from "./src/service/json/JsonSaveTasks";
 
 const main = async () => {
-    const token = process.env.TOKEN;
-    const headers = new Headers({ 'Authorization': `Bearer ${token}` });
+    const loadSavedTasksModule = new SchoolJsonLoadTasks("test.json");
+    const loadNewTasksModule = new ByuWebScrapperLoadTasks([]);
+    const loadViewTasksModule = new SchoolMarkdownLoadTasks("test.md");
+    const compareTasksModule = new CompareSchoolTasks();
+    const updateTasksModule = new SchoolMarkdownUpdateTasks("test.md");
+    const saveTasksModule = new JsonSaveTasks("test.json");
 
-    fetch('https://learningsuite.byu.edu/.85T5/cid-WsQ6rtOzeJAR/student/gradebook', { headers })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
+    const taskManager = new TaskManager(loadSavedTasksModule, loadNewTasksModule, 
+        loadViewTasksModule, compareTasksModule, updateTasksModule, saveTasksModule);
+
+    await taskManager.manage();
+
 }
 
 main();
