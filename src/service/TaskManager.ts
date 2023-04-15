@@ -1,19 +1,19 @@
-import { LoadTasks } from './interfaces/LoadTasks';
-import { CompareTasks } from './interfaces/CompareTasks';
-import { UpdateTasks } from './interfaces/UpdateTasks';
-import { SaveTasks } from './interfaces/SaveTasks';
+import { ILoadTasks } from './interfaces/ILoadTasks';
+import { ICompareTasks } from './interfaces/ICompareTasks';
+import { IUpdateTasks } from './interfaces/IUpdateTasks';
+import { ISaveTasks } from './interfaces/ISaveTasks';
 import { Task } from '../model/Task';
 
 class TaskManager<T extends Task> {
-    loadSavedTasksModule: LoadTasks<T>;
-    loadNewTasksModule: LoadTasks<T>;
-    loadViewTasksModule: LoadTasks<T>;
-    compareTasksModule: CompareTasks<T>;
-    updateTasksModule: UpdateTasks<T>;
-    saveTasksModule: SaveTasks<T>;
+    loadSavedTasksModule: ILoadTasks<T>;
+    loadNewTasksModule: ILoadTasks<T>;
+    loadViewTasksModule: ILoadTasks<T>;
+    compareTasksModule: ICompareTasks<T>;
+    updateTasksModule: IUpdateTasks<T>;
+    saveTasksModule: ISaveTasks<T>;
 
-    constructor(loadSavedTasksModule: LoadTasks<T>, loadNewTasksModule: LoadTasks<T>, loadViewTasksModule: LoadTasks<T>,
-        compareTasksModule: CompareTasks<T>, updateTasksModule: UpdateTasks<T>, saveTasksModule: SaveTasks<T>) {
+    constructor(loadSavedTasksModule: ILoadTasks<T>, loadNewTasksModule: ILoadTasks<T>, loadViewTasksModule: ILoadTasks<T>,
+        compareTasksModule: ICompareTasks<T>, updateTasksModule: IUpdateTasks<T>, saveTasksModule: ISaveTasks<T>) {
         this.loadSavedTasksModule = loadSavedTasksModule;
         this.loadNewTasksModule = loadNewTasksModule;
         this.loadViewTasksModule = loadViewTasksModule;

@@ -1,10 +1,12 @@
-import { Assignment } from "./src/model/school/Assignment";
-import { CardBoardWrapper } from "./src/wrapper/CardBoardWrapper";
 
 const main = async () => {
-    const schoolTask = new Assignment("Test", "Test", "submitted", new Date(), new Date(), new Date(), "Test", 100);
-    const card = new CardBoardWrapper(schoolTask);
-    console.log(card.toString());
+    const token = process.env.TOKEN;
+    const headers = new Headers({ 'Authorization': `Bearer ${token}` });
+
+    fetch('https://learningsuite.byu.edu/.85T5/cid-WsQ6rtOzeJAR/student/gradebook', { headers })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
 }
 
 main();
