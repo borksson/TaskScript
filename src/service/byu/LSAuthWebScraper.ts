@@ -83,7 +83,7 @@ export class LSAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask> {
 
             //console.log("START DATE:", startDate.toLocaleString());
             // TODO: Switch for task type
-            const task = new Assignment(title, "", status, new Date(), dueDate, startDate, className, 0)
+            const task = new Assignment(title, "", status, new Date(0), dueDate, startDate, className, 0)
             tasks.push(task);
         });
 

@@ -7,10 +7,11 @@ import { SchoolMarkdownUpdateTasks } from "./src/service/school/SchoolMarkdownUp
 import { JsonSaveTasks } from "./src/service/json/JsonSaveTasks";
 
 import * as fs from "fs";
-import { LSAuthWebScraper } from "./src/service/byu/LSAuthWebScraper";
 
 import dotenv from "dotenv";
 dotenv.config();
+
+import { CanvasAuthWebScraper } from "./src/service/byu/CanvasAuthWebScraper";
 
 const TEST_CLASS = process.env.TEST_CLASS !== undefined ? process.env.TEST_CLASS : "";
 
@@ -19,7 +20,7 @@ const main = async () => {
     const data = JSON.parse(jsonString.toString());
 
     const loadSavedTasksModule = new SchoolJsonLoadTasks(data.savedTasksPath);
-    const lsWebScrapper = new LSAuthWebScraper(TEST_CLASS);
+    const lsWebScrapper = new CanvasAuthWebScraper(TEST_CLASS);
     const loadNewTasksModule = new ByuWebScrapperLoadTasks([lsWebScrapper]);
     const loadViewTasksModule = new SchoolMarkdownLoadTasks(data.viewTasksPath);
     const compareTasksModule = new CompareSchoolTasks();
