@@ -1,3 +1,4 @@
+import { Assignment } from "../../model/school/Assignment";
 import { SchoolTask } from "../../model/school/SchoolTask";
 import { JsonLoadTasks } from "../json/JsonLoadTasks";
 
@@ -6,6 +7,6 @@ export class SchoolJsonLoadTasks extends JsonLoadTasks<SchoolTask> {
         super(fileName);
     }
     protected createTask(jsonTask: any): SchoolTask {
-        throw new Error("Method not implemented.");
+        return new Assignment("Test", "Test", "Test", new Date(), new Date(), new Date(), "Test", 100)
     }    
 }

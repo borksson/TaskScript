@@ -1,28 +1,40 @@
 import { Task } from "../model/Task";
 import { AuthenticatedWebsiteScraper } from "./AuthenticatedWebsiteScraper";
-import { LoadTasks } from "./LoadTasks";
+import { ILoadTasks } from "./interfaces/ILoadTasks";
 
-export abstract class WebScrapperLoadTasks<T extends Task, W extends AuthenticatedWebsiteScraper<T>> extends LoadTasks<T> {
+export abstract class WebScrapperLoadTasks<T extends Task, W extends AuthenticatedWebsiteScraper<T>> implements ILoadTasks<T> {
     websites: W[];
     authDriver: any;
 
     constructor(websites: W[]) {
-        super();
         this.websites = websites;
     }
 
-    loadFileTasks = async () => {
-        this.authDriver = await this.authenticate();
-        let webTasks = [];
-        // Load tasks from each website
-        for (const website of this.websites) {
-            // Load tasks
-            const tasks = await website.getTasks(this.authDriver);
-            // Add tasks to webTasks
-            webTasks.push(...tasks);
+    loadTasks = async () => {
+        try {
+            await this.authenticate();
+            let webTasks = [];
+            // Load tasks from each website
+            for (const website of this.websites) {
+                // Load tasks
+                const tasks = await website.getTasks(this.authDriver);
+                // Add tasks to webTasks
+                webTasks.push(...tasks);
+            }
+
+            this.authDriver.quit();
+
+            console.log("Web tasks:", webTasks);
+
+            return webTasks;
+        } catch (error) {
+            console.log(error);
+            this.authDriver.quit();
+            throw error;
         }
-        return webTasks;
     }
 
-    protected abstract authenticate(): Promise<any>;
+
+
+    protected abstract authenticate(): Promise<void>;
 }

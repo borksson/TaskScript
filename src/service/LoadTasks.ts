@@ -1,5 +1,5 @@
-import { Task } from "../../model/Task";
-import { ILoadTasks } from "../interfaces/ILoadTasks";
+import { Task } from "../model/Task";
+import { ILoadTasks } from "./interfaces/ILoadTasks";
 
 export abstract class LoadTasks<T extends Task> implements ILoadTasks<T> {
     public async loadTasks(): Promise<T[]> {
