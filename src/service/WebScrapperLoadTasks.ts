@@ -24,8 +24,6 @@ export abstract class WebScrapperLoadTasks<T extends Task, W extends Authenticat
 
             this.authDriver.quit();
 
-            console.log("Web tasks:", webTasks);
-
             return webTasks;
         } catch (error) {
             console.log(error);

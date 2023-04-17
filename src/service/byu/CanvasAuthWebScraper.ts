@@ -71,8 +71,11 @@ export class CanvasAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask
             dueDate.setFullYear(new Date().getFullYear());
             //console.log("DUE DATE:", dueDate.toLocaleString());
 
-            const status = text.includes("graded") ? "completed" : "not_completed";
-            //console.log("STATUS:", status);
+            let status = text.includes("unsubmitted") ? "not_completed" : "completed" ;
+            status = text.includes("missing") ? "missing" : status;
+
+            // console.log("STATUS:", status);
+            // console.log("TEXT:", text);
 
             // Subtract buffer for start date
             const startDate = new Date(dueDate);

@@ -12,16 +12,27 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import { CanvasAuthWebScraper } from "./src/service/byu/CanvasAuthWebScraper";
+import { LSAuthWebScraper } from "./src/service/byu/LSAuthWebScraper";
 
-const TEST_CLASS = process.env.TEST_CLASS !== undefined ? process.env.TEST_CLASS : "";
+import config from "./data/appData.json";
+
 
 const main = async () => {
     const jsonString = fs.readFileSync("./data/appData.json");
     const data = JSON.parse(jsonString.toString());
 
     const loadSavedTasksModule = new SchoolJsonLoadTasks(data.savedTasksPath);
-    const lsWebScrapper = new CanvasAuthWebScraper(TEST_CLASS);
-    const loadNewTasksModule = new ByuWebScrapperLoadTasks([lsWebScrapper]);
+
+    let websites = [];
+    for (const website of config.websites) {
+        if (website.type === "canvas") {
+            websites.push(new CanvasAuthWebScraper(website.link));
+        } else if (website.type === "learningsuite") {
+            websites.push(new LSAuthWebScraper(website.link));
+        }
+    }
+
+    const loadNewTasksModule = new ByuWebScrapperLoadTasks(websites);
     const loadViewTasksModule = new SchoolMarkdownLoadTasks(data.viewTasksPath);
     const compareTasksModule = new CompareSchoolTasks();
     const updateTasksModule = new SchoolMarkdownUpdateTasks(data.viewTasksPath);
