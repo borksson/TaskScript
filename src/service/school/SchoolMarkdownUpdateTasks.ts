@@ -8,6 +8,6 @@ import { format } from 'date-fns'
 //     Due Date: 4/13/2023 10:07:52 PM
 export class SchoolMarkdownUpdateTasks extends MarkdownUpdateTasks<SchoolTask> {
     protected createMarkdownTask(task: SchoolTask): string {
-        return `- [ ] ${task.title} @due(${format(new Date(task.dueDate), 'yyyy-MM-dd')}) #Assignment #Class/${task.className} #Status/${task.status}\n\tDescription: ${task.description}\n\tDue Date: ${format(new Date(task.dueDate), 'MM/dd/yyyy h:mm a')}`;
+        return `- [ ] ${task.title} @due(${format(new Date(task.startDate), 'yyyy-MM-dd')}) #Assignment #Class/${task.className} #Status/${task.status}\n\tDescription: ${task.description}\n\tDue Date: ${format(new Date(task.dueDate), 'MM/dd/yyyy h:mm a')}`;
     }
 }
