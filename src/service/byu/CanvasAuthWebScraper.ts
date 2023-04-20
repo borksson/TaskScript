@@ -59,7 +59,9 @@ export class CanvasAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask
             // Parse dates
             let dueDate = null;
             for (const date of dates) {
-                const parsedDate = new Date(date[0]);
+                const date_text = date[0].replace(/\sby/g, ",").replace(/am/g, " AM").replace(/pm/g, " PM");
+                console.log("DATE TEXT CANVAS:", date_text);
+                const parsedDate = new Date(date_text);
                 if (dueDate === null || dueDate < parsedDate) {
                     dueDate = parsedDate;
                 }
@@ -68,8 +70,10 @@ export class CanvasAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask
             if (dueDate === null) {
                 throw new Error("No date found");
             }
+            console.log("DUE DATE:", dueDate.toLocaleString());
+
             dueDate.setFullYear(new Date().getFullYear());
-            //console.log("DUE DATE:", dueDate.toLocaleString());
+            console.log("DUE DATE:", dueDate.toLocaleString());
 
             let status = text.includes("unsubmitted") ? "not_completed" : "completed" ;
             status = text.includes("missing") ? "missing" : status;

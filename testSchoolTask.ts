@@ -32,7 +32,7 @@ const main = async () => {
         }
     }
 
-    const loadNewTasksModule = new ByuWebScrapperLoadTasks(websites);
+    const loadNewTasksModule = new SchoolJsonLoadTasks(data.newTasksPath); //new ByuWebScrapperLoadTasks(websites);
     const loadViewTasksModule = new SchoolMarkdownLoadTasks(data.viewTasksPath);
     const compareTasksModule = new CompareSchoolTasks();
     const updateTasksModule = new SchoolMarkdownUpdateTasks(data.viewTasksPath);

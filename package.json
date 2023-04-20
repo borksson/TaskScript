@@ -3,6 +3,7 @@
     "@types/node": "^18.15.11"
   },
   "dependencies": {
+    "date-fns": "^2.29.3",
     "dotenv": "^16.0.3",
     "jquery": "^3.6.4",
     "jsdom": "^21.1.1",

@@ -14,8 +14,10 @@ export abstract class MarkdownUpdateTasks<T extends Task> implements IUpdateTask
         return new Promise((resolve, reject) => {
             let markdownData = '';
             for (const task of tasks) {
-                markdownData += this.createMarkdownTask(task);
-                markdownData += '\n';
+                if (task.status !== 'completed') {
+                    markdownData += this.createMarkdownTask(task);
+                    markdownData += '\n';
+                }
             }
             fs.writeFileSync(this.fileName, markdownData);
             resolve();

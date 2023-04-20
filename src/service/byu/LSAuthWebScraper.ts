@@ -57,6 +57,7 @@ export class LSAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask> {
             // Parse dates
             let dueDate = null;
             for (const date of dates) {
+                console.log("DATE TEXT LS:", date[0]);
                 const parsedDate = new Date(date[0]);
                 if (dueDate === null || dueDate < parsedDate) {
                     dueDate = parsedDate;

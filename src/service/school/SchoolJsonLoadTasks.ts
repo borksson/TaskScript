@@ -7,6 +7,6 @@ export class SchoolJsonLoadTasks extends JsonLoadTasks<SchoolTask> {
         super(fileName);
     }
     protected createTask(jsonTask: any): SchoolTask {
-        return new Assignment("Test", "Test", "Test", new Date(), new Date(), new Date(), "Test", 100)
+        return new Assignment(jsonTask.title, jsonTask.description, jsonTask.status, jsonTask.completedData, jsonTask.dueDate, jsonTask.startDate, jsonTask.className, jsonTask.grade);
     }    
 }
