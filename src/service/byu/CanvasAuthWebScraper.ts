@@ -68,7 +68,10 @@ export class CanvasAuthWebScraper extends AuthenticatedWebsiteScraper<SchoolTask
             }
             // Set year
             if (dueDate === null) {
-                throw new Error("No date found");
+                console.log("TEXT:", text);
+                console.log("No date found, skipping");
+                return;
+                // throw new Error("No date found");
             }
             console.log("DUE DATE:", dueDate.toLocaleString());
 
